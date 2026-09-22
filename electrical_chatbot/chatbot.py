@@ -5,18 +5,27 @@ from pathlib import Path
 
 # Get the folder containing this Python file
 
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path(**file**).resolve().parent
 
 # Load dataset
 
-with open(BASE_DIR / "dataset.json", "r", encoding="utf-8") as file:
+with open(
+BASE_DIR / "dataset.json",
+"r",
+encoding="utf-8"
+) as file:
     data = json.load(file)
+
 
 # Load trained model
 
-model = joblib.load(BASE_DIR / "model.pkl")
+model = joblib.load(
+BASE_DIR / "model.pkl"
+)
 
-vectorizer = joblib.load(BASE_DIR / "vectorizer.pkl")
+vectorizer = joblib.load(
+BASE_DIR / "vectorizer.pkl"
+)
 
 # Streamlit page configuration
 
@@ -36,19 +45,15 @@ st.write(
 # Create chat history
 
 if "messages" not in st.session_state:
-
-
     st.session_state.messages = []
 
 
 # Display previous messages
 
 for message in st.session_state.messages:
-
-
     with st.chat_message(message["role"]):
-
         st.write(message["content"])
+
 
 # User input
 
@@ -57,11 +62,12 @@ question = st.chat_input(
 )
 
 if question:
+    question = str(question)
 
 
 # Store user message
 
-    st.session_state.messages.append(
+st.session_state.messages.append(
     {
         "role": "user",
         "content": question
@@ -143,3 +149,4 @@ st.session_state.messages.append(
 with st.chat_message("assistant"):
 
     st.write(response)
+
