@@ -5,7 +5,7 @@ from pathlib import Path
 
 # Get the folder containing this Python file
 
-BASE_DIR = Path(**file**).resolve().parent
+BASE_DIR = Path(__file__).resolve().parent
 
 # Load dataset
 
