@@ -9,7 +9,7 @@ from pathlib import Path
 
 # --------------------------------------------------
 
-BASE_DIR = Path(**file**).resolve().parent
+BASE_DIR = Path(__file__).resolve().parent
 
 # --------------------------------------------------
 
@@ -25,9 +25,8 @@ dataset_path,
 encoding="utf-8"
 ) as file:
 
-```
 data = json.load(file)
-```
+
 
 # --------------------------------------------------
 
@@ -79,10 +78,8 @@ st.write(
 # --------------------------------------------------
 
 if "messages" not in st.session_state:
+    st.session_state.messages = []
 
-```
-st.session_state.messages = []
-```
 
 # --------------------------------------------------
 
@@ -91,12 +88,8 @@ st.session_state.messages = []
 # --------------------------------------------------
 
 for message in st.session_state.messages:
-
-```
-with st.chat_message(message["role"]):
-
-    st.write(message["content"])
-```
+    with st.chat_message(message["role"]):
+        st.write(message["content"])
 
 # --------------------------------------------------
 
@@ -115,11 +108,9 @@ question = st.chat_input(
 # --------------------------------------------------
 
 if question is not None:
-
-```
 # Make sure question is a string
 
-question = str(question).strip()
+    question = str(question).strip()
 
 
 # --------------------------------------------------
@@ -255,4 +246,4 @@ st.session_state.messages.append(
 with st.chat_message("assistant"):
 
     st.write(response)
-```
+
