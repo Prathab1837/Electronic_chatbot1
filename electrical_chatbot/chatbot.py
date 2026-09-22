@@ -19,12 +19,8 @@ BASE_DIR = Path(__file__).resolve().parent
 
 dataset_path = BASE_DIR / "dataset.json"
 
-with open(
-dataset_path,
-"r",
-encoding="utf-8"
-) as file:
-data = json.load(file)
+with open(dataset_path,"r",encoding="utf-8") as file:
+    data = json.load(file)
 
 # --------------------------------------------------
 
@@ -52,10 +48,7 @@ vectorizer = joblib.load(vectorizer_path)
 
 # --------------------------------------------------
 
-st.set_page_config(
-page_title="Electrical Learning Chatbot",
-page_icon="⚡"
-)
+st.set_page_config(page_title="Electrical Learning Chatbot",page_icon="⚡")
 
 # --------------------------------------------------
 
@@ -65,9 +58,7 @@ page_icon="⚡"
 
 st.title("⚡ Electrical Learning Chatbot")
 
-st.write(
-"Ask questions about electrical engineering topics."
-)
+st.write("Ask questions about electrical engineering topics.")
 
 # --------------------------------------------------
 
@@ -76,7 +67,7 @@ st.write(
 # --------------------------------------------------
 
 if "messages" not in st.session_state:
-st.session_state.messages = []
+    st.session_state.messages = []
 
 # --------------------------------------------------
 
