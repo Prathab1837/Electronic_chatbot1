@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent
 dataset_path = BASE_DIR / "dataset.json"
 
 with open(dataset_path, "r", encoding="utf-8") as file:
-data = json.load(file)
+    data = json.load(file)
 
 # --------------------------------------------------
 
@@ -65,10 +65,7 @@ st.write(
 # --------------------------------------------------
 
 if "messages" not in st.session_state:
-
-```
-st.session_state.messages = []
-```
+    st.session_state.messages = []
 
 # --------------------------------------------------
 
@@ -77,12 +74,8 @@ st.session_state.messages = []
 # --------------------------------------------------
 
 for message in st.session_state.messages:
-
-```
-with st.chat_message(message["role"]):
-
-    st.write(message["content"])
-```
+    with st.chat_message(message["role"]):
+        st.write(message["content"])
 
 # --------------------------------------------------
 
@@ -101,11 +94,8 @@ user_input = st.chat_input(
 # --------------------------------------------------
 
 if user_input is not None:
-
-```
 # Convert the input explicitly to a normal Python string
-
-question = str(user_input).strip()
+    question = str(user_input).strip()
 
 
 # Ignore empty input
@@ -225,4 +215,3 @@ st.session_state.messages.append(
 with st.chat_message("assistant"):
 
     st.write(response)
-```
