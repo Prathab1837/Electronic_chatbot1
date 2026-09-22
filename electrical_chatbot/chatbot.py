@@ -10,7 +10,7 @@ BASE_DIR = Path(__file__).resolve().parent
 # Load dataset
 
 with open(BASE_DIR / "dataset.json", "r", encoding="utf-8") as file:
-data = json.load(file)
+    data = json.load(file)
 
 # Load trained model
 
