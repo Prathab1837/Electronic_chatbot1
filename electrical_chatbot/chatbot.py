@@ -100,13 +100,9 @@ if user_input is not None:
 
     if isinstance(user_input, str):
         question = str(user_input).strip()
+        question = st.chat_input("Ask an electrical question...")
 
- 
-
-
-# Check for empty input
-
-if question:
+if question is not None and question.strip() != "":
 
     st.warning("Please enter a question.")
 
