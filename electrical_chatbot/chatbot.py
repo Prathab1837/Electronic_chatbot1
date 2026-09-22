@@ -19,13 +19,9 @@ BASE_DIR = Path(__file__).resolve().parent
 
 dataset_path = BASE_DIR / "dataset.json"
 
-with open(
-dataset_path,
-"r",
-encoding="utf-8"
-) as file:
+with open(dataset_path,"r",encoding="utf-8") as file:
 
-data = json.load(file)
+    data = json.load(file)
 
 
 # --------------------------------------------------
