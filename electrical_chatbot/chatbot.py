@@ -100,7 +100,7 @@ if user_input is not None:
 
 # Ignore empty input
 
-if question == " ":
+if question == none:
 
     st.warning("Please enter a question.")
 
