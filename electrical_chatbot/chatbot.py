@@ -99,17 +99,14 @@ if user_input is not None:
 # Make sure the input is a string
 
     if isinstance(user_input, str):
-
-        question = user_input.strip()
-
-    else:
-
         question = str(user_input).strip()
+
+ 
 
 
 # Check for empty input
 
-if not question:
+if question=="":
 
     st.warning("Please enter a question.")
 
