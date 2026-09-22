@@ -37,19 +37,18 @@ st.write(
 
 if "messages" not in st.session_state:
 
-```
+
     st.session_state.messages = []
-```
+
 
 # Display previous messages
 
 for message in st.session_state.messages:
 
-```
+
     with st.chat_message(message["role"]):
 
         st.write(message["content"])
-```
 
 # User input
 
@@ -59,7 +58,7 @@ question = st.chat_input(
 
 if question:
 
-```
+
 # Store user message
 
     st.session_state.messages.append(
@@ -144,4 +143,3 @@ st.session_state.messages.append(
 with st.chat_message("assistant"):
 
     st.write(response)
-```
