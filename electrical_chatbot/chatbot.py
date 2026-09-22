@@ -5,11 +5,11 @@ from pathlib import Path
 
 # --------------------------------------------------
 
-# Get the folder containing this Python file
+# Get the folder containing chatbot.py
 
 # --------------------------------------------------
 
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path(**file**).resolve().parent
 
 # --------------------------------------------------
 
@@ -19,25 +19,39 @@ BASE_DIR = Path(__file__).resolve().parent
 
 dataset_path = BASE_DIR / "dataset.json"
 
-with open(dataset_path, "r", encoding="utf-8") as file:
-    data = json.load(file)
+with open(
+dataset_path,
+"r",
+encoding="utf-8"
+) as file:
+
+```
+data = json.load(file)
+```
 
 # --------------------------------------------------
 
-# Load trained model and TF-IDF vectorizer
+# Load trained model
 
 # --------------------------------------------------
 
 model_path = BASE_DIR / "model.pkl"
-vectorizer_path = BASE_DIR / "vectorizer.pkl"
 
 model = joblib.load(model_path)
+
+# --------------------------------------------------
+
+# Load TF-IDF vectorizer
+
+# --------------------------------------------------
+
+vectorizer_path = BASE_DIR / "vectorizer.pkl"
 
 vectorizer = joblib.load(vectorizer_path)
 
 # --------------------------------------------------
 
-# Streamlit configuration
+# Streamlit page configuration
 
 # --------------------------------------------------
 
@@ -48,7 +62,7 @@ page_icon="⚡"
 
 # --------------------------------------------------
 
-# Title
+# Application title
 
 # --------------------------------------------------
 
@@ -65,7 +79,10 @@ st.write(
 # --------------------------------------------------
 
 if "messages" not in st.session_state:
-    st.session_state.messages = []
+
+```
+st.session_state.messages = []
+```
 
 # --------------------------------------------------
 
@@ -74,8 +91,12 @@ if "messages" not in st.session_state:
 # --------------------------------------------------
 
 for message in st.session_state.messages:
-    with st.chat_message(message["role"]):
-        st.write(message["content"])
+
+```
+with st.chat_message(message["role"]):
+
+    st.write(message["content"])
+```
 
 # --------------------------------------------------
 
@@ -83,7 +104,7 @@ for message in st.session_state.messages:
 
 # --------------------------------------------------
 
-user_input = st.chat_input(
+question = st.chat_input(
 "Ask an electrical question..."
 )
 
@@ -93,15 +114,23 @@ user_input = st.chat_input(
 
 # --------------------------------------------------
 
-if user_input is not None:
-# Convert the input explicitly to a normal Python string
-    question = str(user_input).strip()
+if question is not None:
+
+```
+# Make sure question is a string
+
+question = str(question).strip()
 
 
-# Ignore empty input
+# --------------------------------------------------
+# Check for empty question
+# --------------------------------------------------
 
-if question is None:
-    st.warning("Please enter a question.")
+if question == "":
+
+    st.warning(
+        "Please enter a question."
+    )
 
     st.stop()
 
@@ -128,7 +157,7 @@ with st.chat_message("user"):
 
 
 # --------------------------------------------------
-# Convert question into TF-IDF vector
+# Convert question to TF-IDF
 # --------------------------------------------------
 
 try:
@@ -140,7 +169,7 @@ try:
 except Exception as error:
 
     st.error(
-        "An error occurred while converting your question "
+        "Error while converting the question "
         "into a TF-IDF vector."
     )
 
@@ -152,32 +181,41 @@ except Exception as error:
 
 
 # --------------------------------------------------
-# Predict intent
+# Calculate prediction probabilities
 # --------------------------------------------------
 
 probabilities = model.predict_proba(
     question_vector
 )
 
+
+# Get highest probability
+
 highest_probability = probabilities.max()
 
+
+# --------------------------------------------------
+# Predict intent
+# --------------------------------------------------
 
 prediction = model.predict(
     question_vector
 )
 
+
 predicted_tag = prediction[0]
 
 
 # --------------------------------------------------
-# Find response
+# Find chatbot response
 # --------------------------------------------------
 
 if highest_probability < 0.30:
 
     response = (
         "I don't know the answer to that yet. "
-        "I currently focus on electrical engineering topics."
+        "I currently focus on electrical "
+        "engineering topics."
     )
 
 else:
@@ -185,6 +223,9 @@ else:
     response = (
         "I don't know the answer to that yet."
     )
+
+
+    # Search for predicted intent
 
     for intent in data["intents"]:
 
@@ -196,7 +237,7 @@ else:
 
 
 # --------------------------------------------------
-# Store bot response
+# Store assistant response
 # --------------------------------------------------
 
 st.session_state.messages.append(
@@ -208,9 +249,10 @@ st.session_state.messages.append(
 
 
 # --------------------------------------------------
-# Display bot response
+# Display assistant response
 # --------------------------------------------------
 
 with st.chat_message("assistant"):
 
     st.write(response)
+```
