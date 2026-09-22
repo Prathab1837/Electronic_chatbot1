@@ -1,0 +1,275 @@
+{
+    "intents": [
+
+        {
+            "tag": "voltage",
+            "patterns": [
+                "What is voltage?",
+                "Define voltage",
+                "Explain voltage",
+                "What does voltage mean?",
+                "What is electrical voltage?",
+                "What is potential difference?",
+                "What is the unit of voltage?",
+                "How is voltage measured?",
+                "Which instrument measures voltage?",
+                "What is voltage measured in?",
+                "What is the symbol for voltage?",
+                "Why is voltage needed in a circuit?",
+                "What happens when voltage increases?",
+                "What happens when voltage decreases?",
+                "How do I measure voltage?",
+                "What is voltage in an electrical circuit?",
+                "How is potential difference related to voltage?",
+                "Can voltage exist without current?",
+                "Why does a circuit need voltage?",
+                "What is the difference between voltage and current?"
+            ],
+            "responses": [
+                "Voltage is the potential difference between two points in an electrical circuit. It is measured in volts (V)."
+            ]
+        },
+
+        {
+            "tag": "current",
+            "patterns": [
+                "What is current?",
+                "Define current",
+                "Explain electric current",
+                "What does current mean?",
+                "What is electrical current?",
+                "What is the unit of current?",
+                "How is current measured?",
+                "Which instrument measures current?",
+                "What is current measured in?",
+                "What is the symbol for current?",
+                "Why does current flow?",
+                "How does current flow in a circuit?",
+                "What happens when current increases?",
+                "What happens when current decreases?",
+                "How do I measure current?",
+                "What is electric current in a circuit?",
+                "What is the difference between current and voltage?",
+                "Why is current important?",
+                "Can current flow without voltage?",
+                "How is current related to charge?"
+            ],
+            "responses": [
+                "Electric current is the flow of electric charge through a circuit. It is measured in amperes (A)."
+            ]
+        },
+
+        {
+            "tag": "resistance",
+            "patterns": [
+                "What is resistance?",
+                "Define resistance",
+                "Explain resistance",
+                "What does resistance mean?",
+                "What is electrical resistance?",
+                "What is the unit of resistance?",
+                "How is resistance measured?",
+                "Which instrument measures resistance?",
+                "What is resistance measured in?",
+                "What is the symbol for resistance?",
+                "Why does resistance oppose current?",
+                "How does resistance affect current?",
+                "What happens when resistance increases?",
+                "What happens when resistance decreases?",
+                "How do I measure resistance?",
+                "What is resistance in an electrical circuit?",
+                "Why is resistance important?",
+                "What causes resistance in a conductor?",
+                "How is resistance related to voltage?",
+                "How is resistance related to current?"
+            ],
+            "responses": [
+                "Resistance is the opposition to the flow of electric current. It is measured in ohms (Ω)."
+            ]
+        },
+
+        {
+            "tag": "power",
+            "patterns": [
+                "What is electrical power?",
+                "What is power?",
+                "Define electrical power",
+                "Explain electrical power",
+                "What does power mean in electricity?",
+                "What is the unit of electrical power?",
+                "How is electrical power measured?",
+                "What is power measured in?",
+                "What is the symbol for power?",
+                "How do I calculate electrical power?",
+                "Why is electrical power important?",
+                "What happens when electrical power increases?",
+                "What is power consumption?",
+                "How is power related to voltage?",
+                "How is power related to current?",
+                "What is electrical power in a circuit?",
+                "How much power does a device consume?",
+                "What is the difference between power and energy?",
+                "How do electrical devices use power?",
+                "Why do electrical appliances have power ratings?"
+            ],
+            "responses": [
+                "Electrical power is the rate at which electrical energy is transferred or consumed. It is measured in watts (W)."
+            ]
+        },
+
+        {
+            "tag": "energy",
+            "patterns": [
+                "What is electrical energy?",
+                "What is energy?",
+                "Define electrical energy",
+                "Explain electrical energy",
+                "What does electrical energy mean?",
+                "What is the unit of electrical energy?",
+                "How is electrical energy measured?",
+                "What is energy measured in?",
+                "What is the difference between power and energy?",
+                "How is electrical energy consumed?",
+                "How is electrical energy calculated?",
+                "Why is electrical energy important?",
+                "What is electrical energy in a circuit?",
+                "How do electrical devices consume energy?",
+                "What is energy consumption?",
+                "How is electricity converted into energy?",
+                "How is electrical energy related to power?",
+                "What happens when electrical energy is supplied?",
+                "What is the SI unit of energy?",
+                "How do we measure electricity consumption?"
+            ],
+            "responses": [
+                "Electrical energy is the energy transferred or consumed by an electrical device. It is commonly measured in joules (J) or kilowatt-hours (kWh)."
+            ]
+        },
+
+        {
+            "tag": "ohms_law",
+            "patterns": [
+                "What is Ohm's law?",
+                "Explain Ohm's law",
+                "Define Ohm's law",
+                "What does Ohm's law state?",
+                "What is the Ohm's law formula?",
+                "How are voltage current and resistance related?",
+                "What is the relationship between voltage and current?",
+                "How do I calculate voltage using Ohm's law?",
+                "How do I calculate current using Ohm's law?",
+                "How do I calculate resistance using Ohm's law?",
+                "What formula is used to calculate current?",
+                "What formula is used to calculate voltage?",
+                "What formula is used to calculate resistance?",
+                "How is current related to resistance?",
+                "How is voltage related to resistance?",
+                "Why is Ohm's law important?",
+                "Where is Ohm's law used?",
+                "How can I solve an Ohm's law problem?",
+                "What are the three quantities in Ohm's law?",
+                "How do voltage current and resistance interact?"
+            ],
+            "responses": [
+                "Ohm's law describes the relationship between voltage, current, and resistance in a circuit."
+            ]
+        },
+
+        {
+            "tag": "unknown",
+            "patterns": [
+                "What is a computer?",
+                "Tell me a joke",
+                "What is the capital of India?",
+                "How do I cook rice?",
+                "Tell me about cricket",
+                "What is programming?",
+                "Who is the president?",
+                "Tell me about movies",
+                "What is the weather?",
+                "How do I learn English?"
+            ],
+            "responses": [
+                "I currently focus on electrical engineering topics."
+            ]
+        },
+        {
+            "tag": "unknown",
+            "patterns": [
+                "What is a computer?",
+                "Tell me a joke",
+                "What is the capital of India?",
+                "How do I cook rice?",
+                "Tell me about cricket",
+                "What is programming?",
+                "Who is the president?",
+                "Tell me about movies",
+                "What is the weather?",
+                "How do I learn English?",
+                "What is Python?",
+                "What is Java?",
+                "What is a smartphone?",
+                "Tell me about football",
+                "Who is a famous actor?",
+                "How do I make tea?",
+                "What is mathematics?",
+                "What is biology?",
+                "Tell me about history",
+                "What is artificial intelligence?",
+                "What is machine learning?",
+                "How do I install software?",
+                "What is a laptop?",
+                "How does a computer work?",
+                "Tell me a story",
+                "What is the internet?",
+                "What is a database?",
+                "How do I learn programming?",
+                "What is a programming language?",
+                "Tell me about space",
+                "How do I find electrical power?",
+"How can I calculate power in a circuit?",
+"What determines the power of an electrical device?",
+"How much electrical power does a device use?",
+"How is power calculated from voltage and current?",
+"What does a watt represent?",
+"Why do electrical devices have different power ratings?",
+"What is the electrical power formula?",
+"How can I calculate the wattage of a device?",
+"What happens to power when current increases?",
+"How can I calculate current?",
+"How much current flows through a circuit?",
+"What determines the amount of current?",
+"How is current related to charge?",
+"What is the flow of charge called?",
+"How can I find current in a circuit?",
+"What happens to current when voltage increases?",
+"What happens to current when resistance increases?",
+"What is the electrical current formula?",
+"How many amperes are flowing in the circuit?",
+"How can I calculate voltage?",
+"How do I find the voltage across a component?",
+"What causes a voltage difference?",
+"How does voltage affect a circuit?",
+"How can I find potential difference?",
+"What determines the voltage in a circuit?",
+"What happens when the supply voltage increases?",
+"How is voltage related to electrical potential?",
+"What is the voltage across a resistor?",
+"How can voltage be measured with a multimeter?",
+"How do voltage current and resistance relate?",
+"Can I calculate current using voltage and resistance?",
+"Can I calculate voltage using current and resistance?",
+"Can I calculate resistance using voltage and current?",
+"What equation connects voltage current and resistance?",
+"How do I solve an Ohm's law calculation?",
+"If voltage and resistance are known how do I find current?",
+"If current and resistance are known how do I find voltage?",
+"If voltage and current are known how do I find resistance?",
+"Which law relates voltage current and resistance?"
+            ],
+            "responses": [
+                "I currently focus on electrical engineering topics."
+            ]
+        }
+    ]
+}
