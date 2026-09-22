@@ -1,93 +1,147 @@
 import json
 import joblib
+import streamlit as st
+from pathlib import Path
 
-from utils import find_response
+# Get the folder containing this Python file
 
+BASE_DIR = Path(**file**).resolve().parent
 
-with open("dataset.json", "r") as file:
-    data = json.load(file)
+# Load dataset
 
+with open(BASE_DIR / "dataset.json", "r", encoding="utf-8") as file:
+data = json.load(file)
 
-model = joblib.load("model.pkl")
+# Load trained model
 
-vectorizer = joblib.load("vectorizer.pkl")
+model = joblib.load(BASE_DIR / "model.pkl")
 
+vectorizer = joblib.load(BASE_DIR / "vectorizer.pkl")
 
-previous_tag = None
+# Streamlit page configuration
 
+st.set_page_config(
+page_title="Electrical Learning Chatbot",
+page_icon="⚡"
+)
 
-def get_response(question):
+# Application title
 
-    global previous_tag
+st.title("⚡ Electrical Learning Chatbot")
 
-    question_vector = vectorizer.transform([question])
+st.write(
+"Ask questions about electrical engineering topics."
+)
 
-    probabilities = model.predict_proba(question_vector)
+# Create chat history
 
-    print("\nAll intent probabilities:")
+if "messages" not in st.session_state:
 
-    for tag, probability in zip(model.classes_, probabilities[0]):
-        print(f"{tag}: {probability:.4f}")
+```
+st.session_state.messages = []
+```
 
-    highest_probability = probabilities.max()
+# Display previous messages
 
-    prediction = model.predict(question_vector)
+for message in st.session_state.messages:
 
-    predicted_tag = prediction[0]
+```
+with st.chat_message(message["role"]):
 
-    print("Confidence:", highest_probability)
-    print("Predicted tag:", predicted_tag)
+    st.write(message["content"])
+```
 
-    if highest_probability < 0.30:
+# User input
 
-        if previous_tag is not None:
+question = st.chat_input(
+"Ask an electrical question..."
+)
 
-            follow_up_words = [
-                "it",
-                "its",
-                "this",
-                "that",
-                "they",
-                "their",
-                "them"
-            ]
+if question:
 
-            words = question.lower().split()
+```
+# Store user message
 
-            is_follow_up = False
-
-            for word in follow_up_words:
-
-                if word in words:
-                    is_follow_up = True
-                    break
-
-            if is_follow_up:
-                predicted_tag = previous_tag
-
-            else:
-                return "I don't know the answer to that yet."
-
-        else:
-            return "I don't know the answer to that yet."
-
-    previous_tag = predicted_tag
-
-    return find_response(data, predicted_tag)
+st.session_state.messages.append(
+    {
+        "role": "user",
+        "content": question
+    }
+)
 
 
-print("Electrical Chatbot")
-print("Type 'quit' to exit.")
+# Display user message
+
+with st.chat_message("user"):
+
+    st.write(question)
 
 
-while True:
+# Convert question to TF-IDF
 
-    question = input("\nYou: ")
+question_vector = vectorizer.transform(
+    [question]
+)
 
-    if question.lower() == "quit":
-        print("Bot: Goodbye!")
-        break
 
-    response = get_response(question)
+# Calculate probabilities
 
-    print("Bot:", response)
+probabilities = model.predict_proba(
+    question_vector
+)
+
+highest_probability = probabilities.max()
+
+
+# Predict intent
+
+prediction = model.predict(
+    question_vector
+)
+
+predicted_tag = prediction[0]
+
+
+# Unknown / low-confidence handling
+
+if highest_probability < 0.30:
+
+    response = (
+        "I don't know the answer to that yet. "
+        "I currently focus on electrical engineering topics."
+    )
+
+else:
+
+    response = (
+        "I don't know the answer to that yet."
+    )
+
+
+    # Find response for predicted intent
+
+    for intent in data["intents"]:
+
+        if intent["tag"] == predicted_tag:
+
+            response = intent["responses"][0]
+
+            break
+
+
+# Store bot response
+
+st.session_state.messages.append(
+    {
+        "role": "assistant",
+        "content": response
+    }
+)
+
+
+# Display bot response
+
+with st.chat_message("assistant"):
+
+    st.write(response)
+```
