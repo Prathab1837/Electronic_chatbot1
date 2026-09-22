@@ -9,7 +9,7 @@ from pathlib import Path
 
 # --------------------------------------------------
 
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path(**file**).resolve().parent
 
 # --------------------------------------------------
 
@@ -19,10 +19,12 @@ BASE_DIR = Path(__file__).resolve().parent
 
 dataset_path = BASE_DIR / "dataset.json"
 
-with open(dataset_path,"r",encoding="utf-8") as file:
-
-    data = json.load(file)
-
+with open(
+dataset_path,
+"r",
+encoding="utf-8"
+) as file:
+data = json.load(file)
 
 # --------------------------------------------------
 
@@ -74,8 +76,7 @@ st.write(
 # --------------------------------------------------
 
 if "messages" not in st.session_state:
-    st.session_state.messages = []
-
+st.session_state.messages = []
 
 # --------------------------------------------------
 
@@ -89,35 +90,37 @@ for message in st.session_state.messages:
 
 # --------------------------------------------------
 
-# Get user question
+# Get user input
 
 # --------------------------------------------------
 
-question = st.chat_input(
-"Ask an electrical question..."
-)
+user_input = st.chat_input("Ask an electrical question...")
 
 # --------------------------------------------------
 
-# Process question
+# Process user input
 
 # --------------------------------------------------
 
-if question is not None:
-# Make sure question is a string
-
-    question = str(question).strip()
+if user_input is not None:
 
 
-# --------------------------------------------------
-# Check for empty question
-# --------------------------------------------------
+# Make sure the input is a string
 
-if question == "":
+    if isinstance(user_input, str):
 
-    st.warning(
-        "Please enter a question."
-    )
+        question = user_input.strip()
+
+    else:
+
+        question = str(user_input).strip()
+
+
+# Check for empty input
+
+if not question:
+
+    st.warning("Please enter a question.")
 
     st.stop()
 
@@ -144,13 +147,27 @@ with st.chat_message("user"):
 
 
 # --------------------------------------------------
+# TF-IDF input
+# --------------------------------------------------
+
+tfidf_input = question
+
+
+# Make sure TF-IDF receives a string
+
+if not isinstance(tfidf_input, str):
+
+    tfidf_input = str(tfidf_input)
+
+
+# --------------------------------------------------
 # Convert question to TF-IDF
 # --------------------------------------------------
 
 try:
 
     question_vector = vectorizer.transform(
-        [question]
+        [tfidf_input]
     )
 
 except Exception as error:
@@ -158,6 +175,26 @@ except Exception as error:
     st.error(
         "Error while converting the question "
         "into a TF-IDF vector."
+    )
+
+    st.write(
+        "Question:",
+        question
+    )
+
+    st.write(
+        "Question type:",
+        type(question).__name__
+    )
+
+    st.write(
+        "TF-IDF input:",
+        tfidf_input
+    )
+
+    st.write(
+        "TF-IDF input type:",
+        type(tfidf_input).__name__
     )
 
     st.code(
@@ -168,12 +205,10 @@ except Exception as error:
 
 
 # --------------------------------------------------
-# Calculate prediction probabilities
+# Calculate probabilities
 # --------------------------------------------------
 
-probabilities = model.predict_proba(
-    question_vector
-)
+probabilities = model.predict_proba(question_vector)
 
 
 # Get highest probability
@@ -185,16 +220,13 @@ highest_probability = probabilities.max()
 # Predict intent
 # --------------------------------------------------
 
-prediction = model.predict(
-    question_vector
-)
-
+prediction = model.predict(question_vector)
 
 predicted_tag = prediction[0]
 
 
 # --------------------------------------------------
-# Find chatbot response
+# Find response
 # --------------------------------------------------
 
 if highest_probability < 0.30:
@@ -212,7 +244,7 @@ else:
     )
 
 
-    # Search for predicted intent
+    # Search for matching intent
 
     for intent in data["intents"]:
 
